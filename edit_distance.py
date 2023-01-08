@@ -40,3 +40,26 @@ class Solution:
                     dp[i+1][j+1] = 1 + min(dp[i][j+1], dp[i+1][j], dp[i][j])
         print(dp)
         return dp[-1][-1]
+
+        """
+        # recursion + memoization
+        memo = {}
+        def md(i, j):
+            if i == len(word1) and j == len(word2):
+                return 0
+            if i == len(word1):
+                return len(word2) - j
+            if j == len(word2):
+                return len(word1) - i
+            if (i, j) not in memo:
+                if word1[i] == word2[j]:
+                    memo[(i,j)] = md(i+1, j+1)
+                else:
+                    insert = 1 + md(i, j+1)
+                    delete = 1 + md(i+1, j)
+                    replace = 1 + md(i+1, j+1)
+                    memo[(i,j)] = min(insert, delete, replace)
+            return memo[(i, j)]
+        return md(0,0)
+        """
+    
